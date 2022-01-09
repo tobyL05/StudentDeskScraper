@@ -1,0 +1,126 @@
+#: import utils kivy.utils
+
+<Connected>:
+    AnchorLayout:
+        padding:[50,50,50,50]
+        id: connected
+        canvas.before:
+            #Color: 
+                #rgba: utils.get_color_from_hex('#F5F5DC')
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source: '/resources/img/binus.png'
+
+        Label:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            id: txtConnected
+            text: 'Connecting...'
+            font_size: 24
+            color: .5, 0, 0, 1
+            bold: True
+
+<Login>:
+    GridLayout:
+        padding:[50,50,50,50]
+        rows:4
+        id: login_layout
+        size: root.width * 0.8, root.height * 0.8
+        row_default_height: 30
+        row_force_default: True
+        spacing:20
+        canvas.before:
+            #Color:
+                #rgba: utils.get_color_from_hex('#F5F5DC')
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source: 'resources/img/binus.png'
+        
+        BoxLayout:
+            orientation:'horizontal'
+            row:1
+            col:1
+            Label:
+                text: 'Binusian ID'
+                font_size:18
+                color: .5, 0, 0, 1
+                bold: True
+
+            TextInput:
+                id: binusID
+                size_hint: (None,None)
+                width:root.width/2
+                height:30
+                multiline:False
+
+        BoxLayout:
+            orientation:'horizontal'
+            row:2
+            col:1
+            Label:
+                text: 'Password'
+                font_size: 18
+                color: .5, 0, 0, 1
+                bold: True
+
+            TextInput:
+                id: password
+                size_hint:(None,None)
+                width:root.width/2
+                height:30
+                multiline:False
+                password:True
+                col:2
+                row:3
+
+        AnchorLayout:
+            Button:
+                id: loginbtn
+                background_normal:''
+                background_color: 1, .8, 0, 1
+                anchor_x:'center'
+                anchor_y:'top'
+                size_hint:(None,None)
+                width:root.width/3
+                height:30
+                col:1
+                row:3
+                text: 'Login'
+                color: 0,0,0,1
+
+                on_press: 
+                    root.do_login(binusID.text, password.text)
+
+        AnchorLayout:
+            Label:
+                id: invalid
+                anchor_x: 'center'
+                anchor_y: 'center'
+                text: 'Invalid login'
+                opacity: 0
+                row: 4
+                color: .5, 0, 0, 1
+                font_size: 20
+        
+<Error>:
+    AnchorLayout:
+        padding:[50,50,50,50]
+        id: errorPage
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source: 'resources/img/binus.png'
+
+        Label:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            halign:'center'
+            id: error 
+            text: 'No internet connection or server is down. Please try again later.'
+            font_size: 18
+            color: .5, 0, 0, 1
+            bold: True
+            text_size: self.size

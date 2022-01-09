@@ -1,0 +1,298 @@
+<ContentNavigationDrawer>:
+
+    ScrollView:
+
+        MDList:
+
+            OneLineListItem:
+                text: "Home"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Home"
+
+            OneLineListItem:
+                text: "Scores"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scores"
+            
+            OneLineListItem:
+                text: "SA/CAS"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "SACAS"
+                 
+            OneLineListItem:
+                text: "School Calendar"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Calendar"
+
+            OneLineListItem:
+                text: "Settings"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Settings"
+
+<ScoreTable@GridLayout>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+    height: self.minimum_height
+    width: self.minimum_width
+    size_hint_x: None
+    size_hint_y: None
+    row_default_height: 30
+    row_force_default: True
+    col_default_width:300
+    cols:2
+    #rows:7
+
+    MDLabel:
+        id: subjectHeaderR1C1
+        text: "Subject"
+        halign: 'center'
+
+    MDLabel:
+        id: gradeHeaderR1C2 
+        text: "Grade"
+        halign: 'center'
+
+    MDLabel:
+        id: subjectNameR2C1
+        text: "Loading subject..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectScoreR2C2
+        text: "Loading score..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectNameR3C1
+        text: "Loading subject..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectScoreR3C2
+        text: "Loading score..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectNameR4C1
+        text: "Loading subject..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectScoreR4C2
+        text: "Loading score..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectNameR5C1
+        text: "Loading subject..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectScoreR5C2
+        text: "Loading score..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectNameR6C1
+        text: "Loading subject..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectScoreR6C2
+        text: "Loading score..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectNameR7C1
+        text: "Loading subject..."
+        halign: 'center'
+
+    MDLabel:
+        id: subjectScoreR7C2
+        text: "Loading score..."
+        halign: 'center'
+
+Screen:
+
+    MDToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        elevation: 10
+        title: "Student Desk v2"
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+		md_bg_color: .5, 0 ,0 ,1
+
+    MDNavigationLayout:
+        x: toolbar.height
+
+        ScreenManager:
+            id: screen_manager
+
+            Home:
+                name: "Home"
+                id: homePage
+
+                AnchorLayout:
+                    GridLayout:
+                        anchor_x: 'center'
+                        anchoy_y: 'center'
+                        cols:1
+                        id: homeLayout
+                        height: self.minimum_height
+                        width: self.minimum_width
+                        size_hint_x: None
+                        size_hint_y: None
+                        row_default_height: 30
+                        row_force_default: True
+                        col_default_width:300
+
+                        WelcomeLbl:
+                            id: welcomeLabel
+                            halign: "center"
+                            row:1
+
+                        MDLabel:
+                            id: DigiClock
+                            halign: "center"
+                            row:2
+
+                        MDLabel:    
+                            text: "Made by Toby (2023)"
+                            halign: 'center'
+                            row:3
+
+
+			Scores:
+				name: "scores"
+                id: "scoresPage"
+
+                #BoxLayout:
+                    #id: scoresContent
+                    #orientation: 'vertical'
+
+                MDBottomNavigation:
+                    text_color_normal: 1, 1, 1, 1
+                    text_color_active: 1, .9, 0, 1
+                    panel_color: .5, 0, 0, 1
+                    first_widget: 'term1'
+
+                    ScoresTerm:
+                        name: 'term1'
+                        text: "Term 1"
+                        id: firstTerm
+                        icon: 'numeric-1-circle'
+                        on_enter: self.getScore(1)
+
+                        MDToolbar:
+                            id: toolbar
+                            pos_hint: {"top": 1}
+                            elevation: 10
+                            title: "Student Desk v2"
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+		                    md_bg_color: .5, 0 ,0 ,1
+
+                        AnchorLayout:
+                            ScoreTable:
+                                id: firstTermScoreTable
+
+                                
+                    ScoresTerm:
+                        name: 'term2'
+                        text: "Term 2"
+                        id: secondTerm
+                        icon: 'numeric-2-circle'
+                        on_enter: self.getScore(2)
+
+                        MDToolbar:
+                            id: toolbar
+                            pos_hint: {"top": 1}
+                            elevation: 10
+                            title: "Student Desk v2"
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+		                    md_bg_color: .5, 0 ,0 ,1
+
+                        AnchorLayout:
+                            ScoreTable:
+                                id: secondTermScoreTable
+
+                    ScoresTerm:
+                        name: 'term3'
+                        text: "Term 3"
+                        id: thirdTerm
+                        icon: 'numeric-3-circle'
+                        on_enter: self.getScore(3) 
+
+                        MDToolbar:
+                            id: toolbar
+                            pos_hint: {"top": 1}
+                            elevation: 10
+                            title: "Student Desk v2"
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+		                    md_bg_color: .5, 0 ,0 ,1
+
+                        AnchorLayout:
+                            ScoreTable:
+                                id: thirdTermScoreTable
+
+                    ScoresTerm:
+                        name: 'term4'
+                        text: "Term 4"
+                        id: fourthTerm
+                        icon: 'numeric-4-circle'
+                        on_enter: self.getScore(4)
+
+                        MDToolbar:
+                            id: toolbar
+                            pos_hint: {"top": 1}
+                            elevation: 10
+                            title: "Student Desk v2"
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+		                    md_bg_color: .5, 0 ,0 ,1
+
+                        AnchorLayout:
+                            ScoreTable:
+                                id: fourthTermScoreTable
+
+		    SACAS:
+                name: "SACAS"
+                id: "casPage"
+
+                MDLabel:
+                    text: "work in progress"
+                    halign: "center"
+
+            Calendar:
+                name: "Calendar"
+                id: "calendarPage"
+
+                MDLabel:
+                    text: "view/download school calendar"
+                    halign: "center"
+
+            Setting:
+                name: "Settings"
+                id: "settingsPage"
+
+                FloatLayout:
+
+                    MDLabel:
+                        id: autoLoginTxt
+                        text: "Auto-login"
+                        pos_hint: {'center_x': .87,'center_y':.5}
+
+                    MDSwitch:
+                        id: autoLoginOpt
+                        pos_hint: {'center_x': .6, 'center_y': .5}
+		                on_active: app.autoLogin(*args)
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
