@@ -10,6 +10,7 @@ import src.mainMenu as next
 
 browser = None
 autologin = False
+error = False
 
 class Connected(Screen):
     pass
@@ -52,13 +53,14 @@ class LoginApp(App):
     password = StringProperty(None)
 
     def build(self):
-        global browser, autologin
+        global browser, autologin, error
         self.title = "Student Desk v2"
         manager = ScreenManager()
         try:
             browser = sel.browser()
         except:
             manager.add_widget(Error(name='error'))
+            error = True
             #print("An error occurred")
             return manager
             #App.get_running_app().stop()
@@ -77,13 +79,18 @@ class LoginApp(App):
             App.get_running_app().stop()
 
 def start():
+    global browser
     Window.size = (500,300)
     LoginApp().run()
     if autologin:
         next.start(browser)
+    if error:
+        browser.quitBrowser()
 
 if __name__ == "__main__":
     Window.size = (500,300)
     LoginApp().run()
     if autologin:
         next.start(browser)
+    if error:
+        browser.quitBrowser()

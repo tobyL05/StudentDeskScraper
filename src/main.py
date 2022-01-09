@@ -2,13 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import pprint as pp
+import chromedriver_binary
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
-path_to_chrome = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-path_to_chromedriver = "C:\\Chromedriver\\chromedriver.exe"
+path_to_chromedriver = "resources\\ChromeDriver\\chromedriver.exe"
 win_size = "1024,768"
 link = "http://apps.simprug.binus.sch.id/student/"
 
@@ -136,11 +136,15 @@ class browser:
 		name = self.driver.find_element(By.XPATH,'//*[@id="top-nav"]/ul[2]/li[2]/a/span')
 		return name.text
 
+	def quitBrowser(self):
+		self.driver.quit()
+
 def start():
 	test = browser()
 	test.login("1670004246","070505-02")
 	#print(test.getName())
 	pp.pprint(test.getScores(1))
+	test.quitBrowser()
 
 if __name__ == "__main__":
 	start()
