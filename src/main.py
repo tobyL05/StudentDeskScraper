@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import pprint as pp
-import chromedriver_binary
+from webdriver_auto_update import check_driver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.chrome.options import Options
@@ -140,6 +140,7 @@ class browser:
 		self.driver.quit()
 
 def start():
+	check_driver('resources\\ChromeDriver')
 	test = browser()
 	test.login("1670004246","070505-02")
 	#print(test.getName())
