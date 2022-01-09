@@ -138,8 +138,10 @@ def start(browserObj):
     browser = browserObj
     Window.size = (800,600)
     TestNavigationDrawer().run()
+    browser.quitBrowser()
 
 if __name__ == "__main__":
     browser = sel.browser()
     browser.login("1670004246","070505-02")
     start(browser)
+    browser.quitBrowser()
