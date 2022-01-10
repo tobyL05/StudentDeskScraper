@@ -2,6 +2,7 @@ from kivy.core.window import Window
 from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
+from webdriver_auto_update import check_driver
 import os
 import src.mainMenu as next
 from src.cryptFile import Decryptor as dec
@@ -11,6 +12,7 @@ import src.mainMenu as next
 browser = None
 autologin = False
 error = False
+loggedin = False 
 
 class Connected(Screen):
     pass
@@ -20,11 +22,15 @@ class Error(Screen):
 
 class Login(Screen):
     def do_login(self, loginText, passwordText):
-        global browser
-        #self.manager.transition = SlideTransition(direction="left")
-        #self.manager.current = 'connected'
+        global browser, loggedin
+        self.manager.transition = SlideTransition(direction="left")
+        self.manager.current = 'connected'
 
         if browser.login(loginText,passwordText):
+            loggedin = True 
+            #print("Logged in")
+            #self.manager.transition = SlideTransition(direction="left")
+            #self.manager.current = 'connected'
             App.get_running_app().stop()
             next.start(browser)
         else:
@@ -47,7 +53,8 @@ class LoginApp(App):
         manager = ScreenManager()
         try:
             browser = sel.browser()
-        except:
+        except Exception as e:
+            print(e)
             manager.add_widget(Error(name='error'))
             error = True
             #print("An error occurred")
@@ -68,18 +75,29 @@ class LoginApp(App):
             App.get_running_app().stop()
 
 def start():
-    global browser
+    global browser, loggedin
+    if not os.listdir("resources\\ChromeDriver"):
+        check_driver("resources\\ChromeDriver")
     Window.size = (500,300)
     LoginApp().run()
     if autologin:
         next.start(browser)
-    if error:
+    elif error:
         browser.quitBrowser()
+    elif not loggedin:
+        browser.quitBrowser()
+        if os.listdir("resources\\ChromeDriver"):
+            os.remove("resources\\ChromeDriver\\chromedriver.exe")
+            #print(os.listdir("resources\\ChromeDriver"))
 
 if __name__ == "__main__":
     Window.size = (500,300)
     LoginApp().run()
     if autologin:
         next.start(browser)
-    if error:
+    elif error:
         browser.quitBrowser()
+    elif not loggedin:
+        browser.quitBrowser()
+        if os.listdir("resources\\ChromeDriver"):
+            os.remove("resources\\ChromeDriver\\chromedriver.exe")
