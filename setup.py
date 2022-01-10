@@ -9,4 +9,5 @@ try:
 	subprocess.run(args=cmd)
 except:
 	print("Error downloading modules")
-start()
+print(path_to_req)
+#start()
