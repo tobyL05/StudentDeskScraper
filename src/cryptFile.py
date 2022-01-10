@@ -2,13 +2,15 @@ from cryptography.fernet import Fernet
 import keyring as kr
 import os
 
+keyPath = os.path.dirname(__file__)[:-3] + "\\resources\\studesk.key"
+
 class Encryptor():
 	def __init__(self):
 		#generate key
 		self.key = Fernet.generate_key()
 		#save key to a file
-		open("studesk.key",'x')
-		with open("studesk.key",'wb') as filekey:
+		open(keyPath,'x')
+		with open(keyPath,'wb') as filekey:
 			filekey.write(self.key)
 
 	def encrypt(self,id,pwd):
@@ -20,7 +22,7 @@ class Encryptor():
 class Decryptor():
 	def __init__(self):
 		#read key
-		with open("studesk.key",'rb') as filekey:
+		with open(keyPath,'rb') as filekey:
 			self.key = filekey.read()
 
 	def decrypt(self):
