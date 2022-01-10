@@ -42,8 +42,8 @@ class browser:
 		try:
 			element = WebDriverWait(self.driver, 1).until(EC.presence_of_element_located((By.CLASS_NAME, "error")))
 		except:
-			return True
-		return False
+			return True #Logged in
+		return False #Error
 
 	def getSemester(self):
 		semSelect = self.driver.find_element(By.XPATH,'//*[@id="CPH_uclProgressReport2010Grade11_uclSemester_cmbSemester"]')	#find the select

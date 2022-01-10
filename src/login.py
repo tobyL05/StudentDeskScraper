@@ -21,16 +21,10 @@ class Error(Screen):
 class Login(Screen):
     def do_login(self, loginText, passwordText):
         global browser
-        self.manager.transition = SlideTransition(direction="left")
-        self.manager.current = 'connected'
+        #self.manager.transition = SlideTransition(direction="left")
+        #self.manager.current = 'connected'
 
         if browser.login(loginText,passwordText):
-            if autologin:
-                App.get_running_app().stop()
-                next.start(browser)
-            #print("Logged in")
-            #self.manager.transition = SlideTransition(direction="left")
-            #self.manager.current = 'connected'
             App.get_running_app().stop()
             next.start(browser)
         else:
@@ -42,11 +36,6 @@ class Login(Screen):
     def resetForm(self):
         self.ids['binusID'].text = ""
         self.ids['password'].text = ""
-
-    def logout(self):
-        self.ids['binusID'].text = ""
-        self.ids['password'].text = ""
-        self.ids['invalid'].text = ""
 
 class LoginApp(App):
     username = StringProperty(None)
