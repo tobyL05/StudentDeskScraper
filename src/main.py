@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
-path_to_chromedriver = "resources\\ChromeDriver\\chromedriver.exe"
+path_to_chromedriver = "resources\\chromedriver.exe"
 win_size = "1024,768"
 link = "http://apps.simprug.binus.sch.id/student/"
 
