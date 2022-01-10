@@ -145,3 +145,5 @@ if __name__ == "__main__":
     browser.login("","")
     start(browser)
     browser.quitBrowser()
+    if os.listdir("resources\\ChromeDriver"):
+        os.remove("chromedriver.exe")
