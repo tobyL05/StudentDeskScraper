@@ -1,6 +1,5 @@
 import subprocess
 import os
-from src.login import start
 
 print("Running startup")
 path_to_req = os.getcwd() + "\\requirements.txt"
@@ -9,4 +8,5 @@ try:
 	subprocess.run(args=cmd)
 except:
 	print("Error downloading modules")
+from src.login import start
 start()
