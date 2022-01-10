@@ -142,6 +142,6 @@ def start(browserObj):
 
 if __name__ == "__main__":
     browser = sel.browser()
-    browser.login("1670004246","070505-02")
+    browser.login("","")
     start(browser)
     browser.quitBrowser()
