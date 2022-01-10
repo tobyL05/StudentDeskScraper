@@ -76,8 +76,8 @@ class LoginApp(App):
 
 def start():
     global browser, loggedin
-    if not os.listdir("resources\\ChromeDriver"):
-        check_driver("resources\\ChromeDriver")
+    if "chromedriver.exe" not in os.listdir("resources"):
+        check_driver("resources")
     Window.size = (500,300)
     LoginApp().run()
     if autologin:
@@ -86,8 +86,8 @@ def start():
         browser.quitBrowser()
     elif not loggedin:
         browser.quitBrowser()
-        if os.listdir("resources\\ChromeDriver"):
-            os.remove("resources\\ChromeDriver\\chromedriver.exe")
+        if "chromedriver.exe" in os.listdir("resources"):
+            os.remove("resources\\chromedriver.exe")
             #print(os.listdir("resources\\ChromeDriver"))
 
 if __name__ == "__main__":
@@ -99,5 +99,5 @@ if __name__ == "__main__":
         browser.quitBrowser()
     elif not loggedin:
         browser.quitBrowser()
-        if os.listdir("resources\\ChromeDriver"):
-            os.remove("resources\\ChromeDriver\\chromedriver.exe")
+        if "chromedriver.exe" in os.listdir("resources"):
+            os.remove("resources\\chromedriver.exe")

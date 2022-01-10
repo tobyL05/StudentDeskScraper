@@ -140,7 +140,7 @@ class browser:
 		self.driver.quit()
 
 def start():
-	check_driver('resources\\ChromeDriver')
+	check_driver('resources')
 	test = browser()
 	test.login("","")
 	#print(test.getName())
