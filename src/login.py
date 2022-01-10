@@ -2,7 +2,7 @@ from kivy.core.window import Window
 from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
-
+from webdriver_auto_update import check_driver
 import os
 import src.mainMenu as next
 from src.cryptFile import Decryptor as dec
@@ -82,6 +82,8 @@ class LoginApp(App):
 
 def start():
     global browser
+    if not os.listdir("resources\\ChromeDriver"):
+        check_driver("resources\\ChromeDriver")
     Window.size = (500,300)
     LoginApp().run()
     if autologin:
