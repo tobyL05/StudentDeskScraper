@@ -1,5 +1,7 @@
 import os
 
+dirpath = os.path.dirname(__file__)
+
 def reqs():
 	print("Running startup")
 	path_to_req = os.path.dirname(__file__) + "\\requirements.txt"

@@ -21,6 +21,8 @@ loadedScores_term1 = False
 loadedScores_term2 = False
 loadedScores_term3 = False
 loadedScores_term4 = False
+dirPath = os.path.dirname(__file__)[:-4]
+resourcePath = os.path.dirname(__file__)[:-4] + "\\resources"
 
 class Home(Screen):
     pass
@@ -93,7 +95,7 @@ class Calendar(Screen):
 
 class Setting(Screen):
     def on_pre_enter(self):
-        if "studesk.key" in os.listdir(os.getcwd()):
+        if "studesk.key" in os.listdir(dirPath):
             MDApp.get_running_app().root.ids['autoLoginOpt'].active = True
        
 
@@ -116,7 +118,7 @@ class TestNavigationDrawer(MDApp):
     def autoLogin(self,checkbox,value):
         global browser
         if value:
-            if "studesk.key" in os.listdir(os.getcwd()):
+            if "studesk.key" in os.listdir(dirPath):
                 return
             #option is on
             creds = enc().encrypt(browser.id,browser.pwd) 
@@ -139,13 +141,13 @@ def start(browserObj):
     Window.size = (800,600)
     TestNavigationDrawer().run()
     browser.quitBrowser()
-    if "chromedriver.exe" in os.listdir("resources"):
-        os.remove("resources\\chromedriver.exe")
+    if "chromedriver.exe" in os.listdir(resourcePath):
+        os.remove(resourcePath + "\\chromedriver.exe")
 
 if __name__ == "__main__":
     browser = sel.browser()
     browser.login("","")
     start(browser)
     browser.quitBrowser()
-    if "chromedriver.exe" in os.listdir("resources"):
-        os.remove("resources\\chromedriver.exe")
+    if "chromedriver.exe" in os.listdir(resourcePath):
+        os.remove(resourcePath + "chromedriver.exe")

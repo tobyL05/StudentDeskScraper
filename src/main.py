@@ -2,13 +2,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import pprint as pp
+import os
 from webdriver_auto_update import check_driver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
-path_to_chromedriver = "resources\\chromedriver.exe"
+path_to_chromedriver= os.path.dirname(__file__)[:-4] + "\\resources\\chromedriver.exe"
 win_size = "1024,768"
 link = "http://apps.simprug.binus.sch.id/student/"
 
@@ -140,7 +141,7 @@ class browser:
 		self.driver.quit()
 
 def start():
-	check_driver('resources')
+	check_driver(os.path.dirname(__file__) + "\\resources")
 	test = browser()
 	test.login("","")
 	#print(test.getName())

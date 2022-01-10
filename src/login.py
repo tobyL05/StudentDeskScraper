@@ -13,6 +13,7 @@ browser = None
 autologin = False
 error = False
 loggedin = False 
+resourcePath = os.path.dirname(__file__)[:-4] + "\\resources"
 
 class Connected(Screen):
     pass
@@ -61,7 +62,7 @@ class LoginApp(App):
             return manager
             #App.get_running_app().stop()
 
-        if "studesk.key" not in os.listdir(os.getcwd()):
+        if "studesk.key" not in os.listdir(resourcePath):
             manager.add_widget(Login(name='login'))
             manager.add_widget(Connected(name='connected'))
             return manager
@@ -76,8 +77,8 @@ class LoginApp(App):
 
 def start():
     global browser, loggedin
-    if "chromedriver.exe" not in os.listdir("resources"):
-        check_driver("resources")
+    if "chromedriver.exe" not in os.listdir(resourcePath):
+        check_driver(resourcePath)
     Window.size = (500,300)
     LoginApp().run()
     if autologin:
@@ -86,8 +87,8 @@ def start():
         browser.quitBrowser()
     elif not loggedin:
         browser.quitBrowser()
-        if "chromedriver.exe" in os.listdir("resources"):
-            os.remove("resources\\chromedriver.exe")
+        if "chromedriver.exe" in os.listdir(resourcePath):
+            os.remove(resourcePath + "\\chromedriver.exe")
             #print(os.listdir("resources\\ChromeDriver"))
 
 if __name__ == "__main__":
@@ -99,5 +100,5 @@ if __name__ == "__main__":
         browser.quitBrowser()
     elif not loggedin:
         browser.quitBrowser()
-        if "chromedriver.exe" in os.listdir("resources"):
-            os.remove("resources\\chromedriver.exe")
+        if "chromedriver.exe" in os.listdir(resourcePath):
+            os.remove(resourcePath + "\\chromedriver.exe")
