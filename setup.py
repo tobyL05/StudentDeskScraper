@@ -9,5 +9,8 @@ try:
 	subprocess.run(args=cmd)
 except:
 	print("Error downloading modules")
-print(path_to_req)
+with open('filx.txt','x') as f:
+	f.write(path_to_req)
+f.close()
+#print(path_to_req)
 #start()
