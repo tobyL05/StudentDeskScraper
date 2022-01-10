@@ -12,6 +12,7 @@ import src.mainMenu as next
 browser = None
 autologin = False
 error = False
+loggedin = True
 
 class Connected(Screen):
     pass
@@ -21,14 +22,12 @@ class Error(Screen):
 
 class Login(Screen):
     def do_login(self, loginText, passwordText):
-        global browser
+        global browser, loggedin
         self.manager.transition = SlideTransition(direction="left")
         self.manager.current = 'connected'
 
         if browser.login(loginText,passwordText):
-            if autologin:
-                App.get_running_app().stop()
-                next.start(browser)
+            loggedin = True 
             #print("Logged in")
             #self.manager.transition = SlideTransition(direction="left")
             #self.manager.current = 'connected'
@@ -90,7 +89,7 @@ def start():
         next.start(browser)
     elif error:
         browser.quitBrowser()
-    else:
+    elif not loggedin:
         if os.listdir("resources\\ChromeDriver"):
             os.remove("chromedriver.exe")
 
@@ -99,5 +98,8 @@ if __name__ == "__main__":
     LoginApp().run()
     if autologin:
         next.start(browser)
-    if error:
+    elif error:
         browser.quitBrowser()
+    elif not loggedin:
+        if os.listdir("resources\\ChromeDriver"):
+            os.remove("chromedriver.exe")
