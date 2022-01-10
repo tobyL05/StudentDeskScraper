@@ -2,6 +2,7 @@ from kivy.core.window import Window
 from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
+
 import os
 import src.mainMenu as next
 from src.cryptFile import Decryptor as dec
@@ -58,7 +59,8 @@ class LoginApp(App):
         manager = ScreenManager()
         try:
             browser = sel.browser()
-        except:
+        except Exception as e:
+            print(e)
             manager.add_widget(Error(name='error'))
             error = True
             #print("An error occurred")
