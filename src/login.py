@@ -12,7 +12,7 @@ import src.mainMenu as next
 browser = None
 autologin = False
 error = False
-loggedin = True
+loggedin = False 
 
 class Connected(Screen):
     pass
@@ -80,7 +80,7 @@ class LoginApp(App):
             App.get_running_app().stop()
 
 def start():
-    global browser
+    global browser, loggedin
     if not os.listdir("resources\\ChromeDriver"):
         check_driver("resources\\ChromeDriver")
     Window.size = (500,300)
@@ -90,8 +90,10 @@ def start():
     elif error:
         browser.quitBrowser()
     elif not loggedin:
+        browser.quitBrowser()
         if os.listdir("resources\\ChromeDriver"):
-            os.remove("chromedriver.exe")
+            os.remove("resources\\ChromeDriver\\chromedriver.exe")
+            #print(os.listdir("resources\\ChromeDriver"))
 
 if __name__ == "__main__":
     Window.size = (500,300)
@@ -101,5 +103,6 @@ if __name__ == "__main__":
     elif error:
         browser.quitBrowser()
     elif not loggedin:
+        browser.quitBrowser()
         if os.listdir("resources\\ChromeDriver"):
-            os.remove("chromedriver.exe")
+            os.remove("resources\\ChromeDriver\\chromedriver.exe")

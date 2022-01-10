@@ -139,6 +139,8 @@ def start(browserObj):
     Window.size = (800,600)
     TestNavigationDrawer().run()
     browser.quitBrowser()
+    if os.listdir("resources\\ChromeDriver"):
+        os.remove("resources\\ChromeDriver\\chromedriver.exe")
 
 if __name__ == "__main__":
     browser = sel.browser()
@@ -146,4 +148,4 @@ if __name__ == "__main__":
     start(browser)
     browser.quitBrowser()
     if os.listdir("resources\\ChromeDriver"):
-        os.remove("chromedriver.exe")
+        os.remove("resources\\ChromeDriver\\chromedriver.exe")
