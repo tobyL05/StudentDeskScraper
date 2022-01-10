@@ -88,8 +88,11 @@ def start():
     LoginApp().run()
     if autologin:
         next.start(browser)
-    if error:
+    elif error:
         browser.quitBrowser()
+    else:
+        if os.listdir("resources\\ChromeDriver"):
+            os.remove("chromedriver.exe")
 
 if __name__ == "__main__":
     Window.size = (500,300)
